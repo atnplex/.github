@@ -1,0 +1,59 @@
+title: "📊 Polls & decisions"
+labels:
+  - poll
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category when you want input on a decision, preference, or tradeoff.
+
+        Keep questions narrow and provide enough context so the votes are meaningful.
+
+  - type: input
+    id: question
+    attributes:
+      label: Poll question
+      placeholder: Example: Should we default all new repos to the shared CI template?
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: Explain why this question matters
+      placeholder: |
+        Provide context, current behavior, and what prompted this poll.
+    validations:
+      required: true
+
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      description: List the options to consider
+      placeholder: |
+        1. Option A
+        2. Option B
+        3. Option C
+    validations:
+      required: true
+
+  - type: textarea
+    id: considerations
+    attributes:
+      label: Considerations
+      description: Optional notes about tradeoffs, constraints, or risks
+      placeholder: |
+        Mention any important tradeoffs, constraints, or things to keep in mind when voting.
+    validations:
+      required: false
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: How will the result be used?
+      description: Optional but recommended
+      placeholder: Describe how you plan to use the poll results (e.g., guidance only, final decision, input for a proposal).
+    validations:
+      required: false
