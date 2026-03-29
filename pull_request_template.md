@@ -1,74 +1,85 @@
 ## Summary
 
-Describe what this PR changes in 1-3 concise bullets.
+Describe the main changes in a few concise bullets.
 
 - 
 - 
 - 
+
+---
 
 ## Why
 
 What problem does this solve, improve, or unblock?
 
-## Scope
+---
 
-What areas does this touch?
+## Scope
 
 - [ ] CI / GitHub Actions
 - [ ] Infrastructure / deployment
 - [ ] Containers / Docker
-- [ ] Networking / DNS / proxying
+- [ ] Networking / DNS / proxy
 - [ ] Application code
 - [ ] Documentation
 - [ ] Dependencies
 - [ ] Other
 
+---
+
 ## Validation
 
-What did you do to verify this change?
+How was this tested or verified?
 
 - [ ] Tested locally
 - [ ] CI passes
-- [ ] Verified logs/output
-- [ ] Verified rollback path if relevant
-- [ ] Documentation updated if needed
+- [ ] Reviewed logs/output
+- [ ] Confirmed rollback path if relevant
+- [ ] Updated documentation if needed
 
 ### Validation details
 
 ```text
-Paste commands, logs, screenshots, or notes here.
+Commands run, screenshots, logs, outputs, or notes.
 ```
+
+---
 
 ## Operational impact
 
-Does this change affect runtime behavior, deployment, secrets, networking, storage, or user-facing functionality?
+Does this change affect runtime behavior, deployment, config, secrets, networking, storage, or service availability?
 
 - [ ] No operational impact
 - [ ] Requires deployment/update
 - [ ] Requires config/env changes
 - [ ] Requires secrets changes
-- [ ] Requires downtime or service restart
+- [ ] Requires restart/downtime
 - [ ] Requires follow-up work
 
 ### Operational notes
 
-Describe any rollout, restart, migration, or follow-up requirements.
+```text
+Rollout notes, restart steps, migration details, env changes, or follow-up items.
+```
 
-## Risk review
+---
 
-- [ ] Low risk
-- [ ] Medium risk
-- [ ] High risk
+## Risk
 
-### Risk notes
+- [ ] Low
+- [ ] Medium
+- [ ] High
 
-Call out anything reviewers should be extra careful about.
+### Reviewer notes
 
-## Checklist
+Anything reviewers should pay close attention to?
 
-- [ ] PR title is clear and follows conventions
+---
+
+## Final checklist
+
+- [ ] PR title is clear
 - [ ] Changes are scoped and intentional
-- [ ] No unrelated cleanup mixed in
-- [ ] Sensitive data was not committed
-- [ ] Docs/comments updated where useful
+- [ ] No unrelated cleanup is mixed in
+- [ ] No secrets or sensitive data were committed
 - [ ] Ready for review
