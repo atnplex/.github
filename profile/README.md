@@ -1,31 +1,34 @@
 # atnplex
 
-Infrastructure, automation, self-hosted tooling, and practical platform engineering.
+Practical infrastructure, automation, self-hosted tooling, and platform engineering.
 
-## What we work on
+## Focus
+
+We build and maintain projects around:
 
 - Infrastructure and DevOps automation
-- Self-hosted services and homelab-adjacent tooling
-- CI/CD and GitHub Actions workflows
-- Containerized services and deployment patterns
-- Internal experiments, migrations, and operational tooling
+- Self-hosted services and operational tooling
+- GitHub Actions and CI/CD workflows
+- Containerized applications and deployment patterns
+- Internal utilities, migration work, and experiments
 
-## How we work
+## Working style
 
-We prefer:
+We prefer systems that are:
 
-- reusable workflows
-- simple, repeatable automation
-- safe defaults
-- clean repository hygiene
-- practical, maintainable documentation
+- reusable
+- observable
+- boring in production
+- easy to maintain
+- documented well enough to survive later
 
-## Contribution expectations
+## Contributing
 
-When opening issues or pull requests:
+If you open an issue or pull request:
 
-- be specific
-- include reproduction steps where applicable
-- include logs, screenshots, or config snippets when helpful
-- keep changes focused
-- document any operational impact
+- keep it specific and actionable  
+- include repro steps where possible  
+- share logs, config snippets, and screenshots when they help  
+- document any operational impact (deployment, config, secrets, downtime)
+
+Thanks for helping us keep things reliable and maintainable.
