@@ -4,13 +4,13 @@ Public organization profile and shared community health files for the `atnplex` 
 
 ## Purpose
 
-This repository is used for:
+This repository contains the public-facing defaults used across `atnplex`, including:
 
-- the public organization profile
-- shared pull request templates
+- organization profile content
 - shared issue templates
-- public-facing community defaults
+- shared pull request templates
+- community health defaults
 
 ## Notes
 
-Private reusable workflows, internal CI/CD standards, runner strategy, and shared automation templates are maintained separately in the private [atnplex/.github-private](https://github.com/atnplex/.github-private) repository.
+Internal reusable workflows, CI/CD conventions, runner strategy, and private shared automation are maintained separately in the private repository: [atnplex/.github-private](https://github.com/atnplex/.github-private)
