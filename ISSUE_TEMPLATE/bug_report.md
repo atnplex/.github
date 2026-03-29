@@ -74,6 +74,6 @@ Anything else that may help reproduce or triage the issue.
 
 ## Pre-submission checklist
 
-- [ ] I searched for existing issues first
-- [ ] I included enough detail to reproduce or investigate the issue
+- [ ] I searched for existing issues first  
+- [ ] I included enough detail to reproduce or investigate the issue  
 - [ ] I removed any sensitive information, secrets, or private tokens
