@@ -1,0 +1,54 @@
+title: "📢 Announcements"
+labels:
+  - announcement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category for important updates related to the `atnplex` organization: new projects, shared workflow changes, deprecations, migrations, or policy updates.
+
+        Keep posts concise and focused so they’re easy to scan later.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Announcement title
+      description: A short, clear headline
+      placeholder: Example: New shared CI workflow for autofix and pre-commit
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What changed, why it matters, and any key dates
+      placeholder: |
+        Provide the main details of the announcement, including:
+        - What is changing
+        - Why it’s changing
+        - When it takes effect
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact and actions
+      description: Who is affected and what they need to do, if anything
+      placeholder: |
+        Describe impact and required actions, for example:
+        - Repos that need updates
+        - New defaults or conventions
+        - Any migration or rollout steps
+    validations:
+      required: false
+
+  - type: textarea
+    id: links
+    attributes:
+      label: Links and references
+      description: Optional supporting links
+      placeholder: Related PRs, workflows, docs, repositories, or release notes
+    validations:
+      required: false
