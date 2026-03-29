@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an improvement, automation, or new capability
+about: Suggest an improvement, workflow enhancement, or new capability
 title: "[Feature]: "
 labels: enhancement
 ---
@@ -56,6 +56,6 @@ Optional technical notes, risks, dependencies, or affected systems.
 
 ## Pre-submission checklist
 
-- [ ] I searched for existing issues or related feature requests first
-- [ ] This request is specific enough to evaluate
+- [ ] I searched for existing issues or related feature requests first  
+- [ ] This request is specific enough to evaluate  
 - [ ] I included enough context to explain why this would help
