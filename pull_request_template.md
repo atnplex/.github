@@ -78,8 +78,8 @@ Anything reviewers should pay close attention to?
 
 ## Final checklist
 
-- [ ] PR title is clear
-- [ ] Changes are scoped and intentional
-- [ ] No unrelated cleanup is mixed in
-- [ ] No secrets or sensitive data were committed
+- [ ] PR title is clear  
+- [ ] Changes are scoped and intentional  
+- [ ] No unrelated cleanup is mixed in  
+- [ ] No secrets or sensitive data were committed  
 - [ ] Ready for review
