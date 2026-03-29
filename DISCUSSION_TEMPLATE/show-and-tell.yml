@@ -1,0 +1,61 @@
+title: "🛠️ Show & tell"
+labels:
+  - showcase
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category to share something you built, improved, automated, or learned that’s relevant to `atnplex`:
+
+        - a new workflow or action
+        - a self-hosted service
+        - a useful script or tooling
+        - a dashboard or monitoring setup
+        - a neat deployment or networking pattern
+
+        Screenshots, code snippets, and links are welcome.
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: Example: Unified CI workflow with autofix + dependency review
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What are you sharing?
+      placeholder: |
+        Give a short description of the project, workflow, tool, or pattern.
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why did you build this?
+      description: Optional, but interesting
+      placeholder: Problem solved, goal, or motivation behind the work.
+    validations:
+      required: false
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details and implementation
+      description: Optional
+      placeholder: |
+        Implementation notes, architecture, key files, tricks, or tradeoffs you discovered.
+    validations:
+      required: false
+
+  - type: textarea
+    id: links
+    attributes:
+      label: Links and screenshots
+      description: Optional
+      placeholder: Repositories, gists, docs, screenshots, or any other references.
+    validations:
+      required: false

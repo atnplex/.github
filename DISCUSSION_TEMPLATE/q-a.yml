@@ -1,0 +1,55 @@
+title: "❓ Questions & answers"
+labels:
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category for questions about:
+
+        - how to use a workflow, script, or tool
+        - architecture or repo layout
+        - deployment or networking patterns
+        - debugging or troubleshooting direction
+        - conventions in the `atnplex` organization
+
+        If this is really a bug or feature request, please open an issue instead.
+
+  - type: input
+    id: question
+    attributes:
+      label: Question
+      placeholder: Example: How should I reference the shared autofix workflow from a personal repo?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Where are you running into this, and what have you tried?
+      placeholder: |
+        Include:
+        - relevant repo(s)
+        - commands or workflows you tried
+        - any relevant environment details
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details or examples
+      description: Optional, but very helpful
+      placeholder: Logs, snippets, screenshots, or minimal config examples.
+    validations:
+      required: false
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: What outcome are you aiming for?
+      description: Optional
+      placeholder: Describe what “working” would look like for you.
+    validations:
+      required: false

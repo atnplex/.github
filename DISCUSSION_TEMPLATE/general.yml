@@ -1,0 +1,38 @@
+title: "💬 General discussion"
+labels:
+  - discussion
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category for general conversations about `atnplex` projects, infrastructure, workflows, self-hosted tools, or anything that doesn’t fit a bug report or feature request.
+
+        If the topic turns into actionable work, we can always spin off an issue later.
+
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: What do you want to talk about?
+      placeholder: Example: Standardizing repo bootstrap files across atnplex
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Share enough background so others can follow along
+      placeholder: |
+        Describe the context, current situation, or motivation behind this discussion.
+    validations:
+      required: true
+
+  - type: textarea
+    id: goals
+    attributes:
+      label: What would you like from this discussion?
+      description: Optional, but helpful
+      placeholder: Feedback, direction, alternatives, validation, brainstorming, etc.
+    validations:
+      required: false

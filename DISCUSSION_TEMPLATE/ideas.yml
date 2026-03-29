@@ -1,0 +1,79 @@
+title: "💡 Ideas & experiments"
+labels:
+  - idea
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this category for new ideas, experiments, or improvements related to:
+        - CI / GitHub Actions
+        - infrastructure and deployments
+        - containers / Docker
+        - networking / DNS / proxying
+        - automation / scripting
+        - self-hosted services
+        - developer experience
+
+        Keep the idea specific enough that others can react and help refine it.
+
+  - type: input
+    id: title
+    attributes:
+      label: Idea title
+      placeholder: Example: Shared pre-commit + autofix starter for all repos
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CI / GitHub Actions
+        - Infrastructure / deployment
+        - Containers / Docker
+        - Networking / DNS / proxy
+        - Automation / scripting
+        - Documentation
+        - Developer experience
+        - Self-hosted services
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this idea solve?
+      placeholder: |
+        Describe the pain point, inefficiency, or missing capability this idea addresses.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed idea
+      placeholder: |
+        Outline the concept, workflow, or approach you have in mind.
+        Include enough detail to discuss tradeoffs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Why this would be valuable
+      description: Optional, but helps prioritize
+      placeholder: Operational impact, developer productivity, simplicity, reliability, etc.
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Optional
+      placeholder: Constraints, dependencies, related tools, similar prior work, or next steps.
+    validations:
+      required: false
