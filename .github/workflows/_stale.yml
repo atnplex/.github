@@ -11,14 +11,13 @@ on:
   workflow_call:
     inputs:
       runner:
-        description: >
-          Runner label(s) to use for this job. Accepts a JSON string for
-          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
-          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
-          runner expression: self-hosted for private org repos, ubuntu-latest
-          for everything else.
-        required: false
+        description: |
+          Runner label(s) to use for this job. Accepts a string (single label)
+          or a JSON array string for multiple labels, e.g. '["self-hosted","linux"]'.
+          Defaults to the standard atnplex runner expression — private atnplex repos
+          use self-hosted runners; public or external repos use ubuntu-latest.
         type: string
+        required: false
         default: ""
 
 permissions:
@@ -33,13 +32,10 @@ jobs:
   stale:
     name: Process Stale Issues and PRs
     runs-on: >
-      ${{
-        inputs.runner != ''
-          && fromJSON(inputs.runner)
-          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
-              && fromJSON('["self-hosted","linux"]')
-              || 'ubuntu-latest')
-      }}
+      ${{ inputs.runner != '' && inputs.runner
+        || (github.event.repository.private == true && github.repository_owner == 'atnplex')
+          && fromJSON('["self-hosted","linux"]')
+        || 'ubuntu-latest' }}
     timeout-minutes: 10
 
     steps:
