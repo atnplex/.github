@@ -1,0 +1,55 @@
+# .github/workflows/_dependency-review.yml
+#
+# What it does:  Reviews dependency changes in pull requests and fails on
+#                high-severity vulnerabilities; posts a summary comment on the PR.
+# When it runs:  Called by consumer repos via `workflow_call` on pull_request events.
+# Permissions:   contents: read, pull-requests: write
+
+name: _dependency-review
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: >
+          Runner label(s) to use for this job. Accepts a JSON string for
+          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
+          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
+          runner expression: self-hosted for private org repos, ubuntu-latest
+          for everything else.
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dependency-review-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: >
+      ${{
+        inputs.runner != ''
+          && fromJSON(inputs.runner)
+          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
+              && fromJSON('["self-hosted","linux"]')
+              || 'ubuntu-latest')
+      }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Dependency review
+        uses: actions/dependency-review-action@3b139cfc5fae8b618d3eae3675e383bb1769c019 # v4.5.0
+        with:
+          fail-on-severity: high
+          comment-summary-in-pr: always

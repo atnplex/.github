@@ -1,0 +1,121 @@
+# .github/workflows/_autofix.yml
+#
+# What it does:  Auto-fix formatting, normalize whitespace/line-endings, and
+#                commit safe fixes back to the branch using autofix.ci.
+# When it runs:  Called by consumer repos via `workflow_call` on pull_request
+#                or push events.
+# Permissions:   contents: write  (autofix.ci must push the fix commits)
+
+name: _autofix
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: >
+          Runner label(s) to use for this job. Accepts a JSON string for
+          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
+          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
+          runner expression: self-hosted for private org repos, ubuntu-latest
+          for everything else.
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write # needs write so autofix.ci can push commits
+
+concurrency:
+  group: autofix-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  autofix:
+    name: autofix.ci
+    runs-on: >
+      ${{
+        inputs.runner != ''
+          && fromJSON(inputs.runner)
+          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
+              && fromJSON('["self-hosted","linux"]')
+              || 'ubuntu-latest')
+      }}
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Python
+        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: "3.x"
+
+      - name: Setup Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: "lts/*"
+        continue-on-error: true
+
+      - name: Install pre-commit
+        run: |
+          python -m pip install --upgrade pip
+          pip install pre-commit
+        shell: bash
+
+      - name: Run pre-commit if configured
+        run: |
+          if [ -f .pre-commit-config.yaml ]; then
+            pre-commit run --all-files || true
+          else
+            echo "No .pre-commit-config.yaml found, skipping pre-commit"
+          fi
+        shell: bash
+
+      - name: Run Prettier if package.json exists
+        run: |
+          if [ -f package.json ]; then
+            npm ci --prefer-offline || npm install || true
+            npx prettier --write . || true
+          else
+            echo "No package.json found, skipping Prettier"
+          fi
+        shell: bash
+
+      - name: Run Ruff if Python files exist
+        run: |
+          if find . -type f -name "*.py" | grep -q .; then
+            pip install ruff
+            ruff check --fix . || true
+            ruff format . || true
+          else
+            echo "No Python files found, skipping Ruff"
+          fi
+        shell: bash
+
+      - name: Run shfmt if shell files exist
+        run: |
+          if find . -type f -name "*.sh" | grep -q .; then
+            sudo apt-get update
+            sudo apt-get install -y shfmt
+            find . -type f -name "*.sh" -exec shfmt -w {} +
+          else
+            echo "No shell files found, skipping shfmt"
+          fi
+        shell: bash
+        continue-on-error: true
+
+      - name: Run gofmt if go.mod exists
+        run: |
+          if [ -f go.mod ]; then
+            go fmt ./... || true
+          else
+            echo "No go.mod found, skipping go fmt"
+          fi
+        shell: bash
+        continue-on-error: true
+
+      - name: Commit autofixes
+        uses: autofix-ci/action@7a166d7532b277f34e16238930461bf77f9d7ed8 # v1.x (2024-02)

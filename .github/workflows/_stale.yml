@@ -1,0 +1,59 @@
+# .github/workflows/_stale.yml
+#
+# What it does:  Marks inactive issues and pull requests as stale after a
+#                configurable period, then closes them after a grace period.
+# When it runs:  Called by consumer repos via `workflow_call` on schedule events.
+# Permissions:   issues: write, pull-requests: write
+
+name: _stale
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: >
+          Runner label(s) to use for this job. Accepts a JSON string for
+          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
+          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
+          runner expression: self-hosted for private org repos, ubuntu-latest
+          for everything else.
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: stale-${{ github.repository }}
+  cancel-in-progress: false # let stale runs complete; they are sequential by schedule
+
+jobs:
+  stale:
+    name: Process Stale Issues and PRs
+    runs-on: >
+      ${{
+        inputs.runner != ''
+          && fromJSON(inputs.runner)
+          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
+              && fromJSON('["self-hosted","linux"]')
+              || 'ubuntu-latest')
+      }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Process stale issues and PRs
+        uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639 # v9
+        with:
+          stale-issue-message: "This issue has been inactive for 60 days. It will be closed in 7 days unless activity resumes."
+          stale-pr-message: "This PR has been inactive for 30 days. It will be closed in 7 days unless activity resumes."
+          close-issue-message: "Closed due to inactivity. Reopen if still relevant."
+          close-pr-message: "Closed due to inactivity. Reopen if still relevant."
+          days-before-issue-stale: 60
+          days-before-pr-stale: 30
+          days-before-close: 7
+          stale-issue-label: stale
+          stale-pr-label: stale
+          exempt-issue-labels: "pinned,security,blocked"
+          exempt-pr-labels: "pinned,blocked,do-not-merge"

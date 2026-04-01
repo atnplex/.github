@@ -1,0 +1,62 @@
+# .github/workflows/_pr-title-check.yml
+#
+# What it does:  Validates pull request titles against Conventional Commits
+#                naming conventions (feat, fix, docs, chore, etc.).
+# When it runs:  Called by consumer repos via `workflow_call` on pull_request events.
+# Permissions:   pull-requests: read
+
+name: _pr-title-check
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: >
+          Runner label(s) to use for this job. Accepts a JSON string for
+          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
+          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
+          runner expression: self-hosted for private org repos, ubuntu-latest
+          for everything else.
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  pull-requests: read
+
+concurrency:
+  group: pr-title-check-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr-title-check:
+    name: Validate PR Title
+    runs-on: >
+      ${{
+        inputs.runner != ''
+          && fromJSON(inputs.runner)
+          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
+              && fromJSON('["self-hosted","linux"]')
+              || 'ubuntu-latest')
+      }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Check PR title
+        uses: amannn/action-semantic-pull-request@e32d7e603df1aa1ba07e981f2a23455dee596825 # v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          requireScope: false

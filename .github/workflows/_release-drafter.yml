@@ -1,0 +1,50 @@
+# .github/workflows/_release-drafter.yml
+#
+# What it does:  Automatically maintains a draft release by categorizing merged
+#                pull requests based on their labels.
+# When it runs:  Called by consumer repos via `workflow_call` on push to main/master.
+# Permissions:   contents: write (to create/update draft releases),
+#                pull-requests: read (to read merged PR metadata)
+
+name: _release-drafter
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: >
+          Runner label(s) to use for this job. Accepts a JSON string for
+          multi-label runners (e.g. '["self-hosted","linux"]') or a plain
+          string (e.g. 'ubuntu-latest'). Defaults to the standard atnplex
+          runner expression: self-hosted for private org repos, ubuntu-latest
+          for everything else.
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: release-drafter-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false # never cancel an in-progress release draft update
+
+jobs:
+  release-drafter:
+    name: Update Draft Release
+    runs-on: >
+      ${{
+        inputs.runner != ''
+          && fromJSON(inputs.runner)
+          || ((github.event.repository.private == true && github.repository_owner == 'atnplex')
+              && fromJSON('["self-hosted","linux"]')
+              || 'ubuntu-latest')
+      }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Update draft release
+        uses: release-drafter/release-drafter@67e173cadb2fbd3de94f4a861e0c48c913b462ae # v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
