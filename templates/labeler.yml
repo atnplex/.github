@@ -1,0 +1,78 @@
+# templates/labeler.yml
+#
+# Copy this to .github/labeler.yml in the consumer repository.
+# Used by the _labeler.yml reusable workflow.
+#
+# Docs: https://github.com/actions/labeler
+
+# ── Language / tech stack ────────────────────────────────────────────────────
+python:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.py'
+
+shell:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.sh'
+
+go:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'
+
+docker:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'Dockerfile'
+      - 'Dockerfile.*'
+      - 'docker-compose.yml'
+      - 'docker-compose.*.yml'
+
+# ── Infra / config ───────────────────────────────────────────────────────────
+infrastructure:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'terraform/**'
+      - 'ansible/**'
+      - '*.tf'
+      - '*.tfvars'
+
+configuration:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '*.yml'
+      - '*.yaml'
+      - '*.toml'
+      - '*.ini'
+      - '*.cfg'
+
+# ── CI / workflows ───────────────────────────────────────────────────────────
+ci:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**'
+      - '.github/actions/**'
+
+# ── Documentation ────────────────────────────────────────────────────────────
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**'
+      - 'LICENSE'
+
+# ── Dependencies ─────────────────────────────────────────────────────────────
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'requirements*.txt'
+      - 'pyproject.toml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Pipfile'
+      - 'Pipfile.lock'
+      - 'go.mod'
+      - 'go.sum'

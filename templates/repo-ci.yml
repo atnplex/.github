@@ -1,0 +1,82 @@
+# templates/repo-ci.yml
+#
+# Copy this file to .github/workflows/ci.yml in any atnplex repository.
+# Remove any jobs that are not relevant to that repository.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: "0 9 * * 1" # every Monday at 09:00 UTC (for stale job)
+
+permissions:
+  contents: read
+
+jobs:
+
+  autofix:
+    name: Autofix
+    uses: atnplex/.github/.github/workflows/_autofix.yml@main
+    permissions:
+      contents: write
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest  # uncomment to override runner
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request' && github.event.repository.private == false
+    uses: atnplex/.github/.github/workflows/_dependency-review.yml@main
+    permissions:
+      contents: read
+      pull-requests: write
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest
+
+  labeler:
+    name: Labeler
+    if: github.event_name == 'pull_request'
+    uses: atnplex/.github/.github/workflows/_labeler.yml@main
+    permissions:
+      contents: read
+      pull-requests: write
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest
+
+  pr-title-check:
+    name: PR Title Check
+    if: github.event_name == 'pull_request'
+    uses: atnplex/.github/.github/workflows/_pr-title-check.yml@main
+    permissions:
+      pull-requests: read
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest
+
+  release-drafter:
+    name: Release Drafter
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    uses: atnplex/.github/.github/workflows/_release-drafter.yml@main
+    permissions:
+      contents: write
+      pull-requests: read
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest
+
+  stale:
+    name: Stale
+    if: github.event_name == 'schedule'
+    uses: atnplex/.github/.github/workflows/_stale.yml@main
+    permissions:
+      issues: write
+      pull-requests: write
+    secrets: inherit
+    # with:
+    #   runner: ubuntu-latest

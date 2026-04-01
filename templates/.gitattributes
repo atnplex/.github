@@ -1,0 +1,39 @@
+# templates/.gitattributes
+#
+# Copy this to .gitattributes in the consumer repository.
+# Ensures consistent line endings and binary file handling.
+
+# Default: normalize all text files to LF in the repo
+* text=auto eol=lf
+
+# Explicitly mark common text formats
+*.sh text eol=lf
+*.py text eol=lf
+*.go text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.env.example text eol=lf
+
+# Binary files — never diff or convert
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.tgz binary
+
+# Shell scripts: always LF, mark as executable
+*.sh text eol=lf diff=custom

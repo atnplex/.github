@@ -1,0 +1,14 @@
+# .github/CODEOWNERS
+#
+# Code owners for atnplex/.github.
+# Any change to any file in this repository requires a review from @atnplex/owners.
+# Specific paths override the wildcard rule — list more specific paths first.
+
+# Require owner review for all changes
+* @atnplex/owners
+
+# Explicit entries for highest-risk paths (redundant with * but clear)
+.github/workflows/ @atnplex/owners
+templates/ @atnplex/owners
+docs/ @atnplex/owners
+profile/ @atnplex/owners

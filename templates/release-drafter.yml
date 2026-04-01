@@ -1,0 +1,63 @@
+# templates/release-drafter.yml
+#
+# Copy this to .github/release-drafter.yml in the consumer repository.
+# Used by the _release-drafter.yml reusable workflow.
+#
+# Docs: https://github.com/release-drafter/release-drafter
+
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feat'
+      - 'feature'
+      - 'enhancement'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bug'
+  - title: '🧹 Maintenance'
+    labels:
+      - 'chore'
+      - 'refactor'
+      - 'build'
+      - 'ci'
+  - title: '📖 Documentation'
+    labels:
+      - 'docs'
+      - 'documentation'
+  - title: '⚡ Performance'
+    labels:
+      - 'perf'
+      - 'performance'
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&' # escapes chars for Markdown
+
+version-resolver:
+  major:
+    labels:
+      - 'breaking-change'
+      - 'major'
+  minor:
+    labels:
+      - 'feat'
+      - 'feature'
+      - 'enhancement'
+  patch:
+    labels:
+      - 'fix'
+      - 'bug'
+      - 'chore'
+      - 'refactor'
+      - 'build'
+      - 'ci'
+      - 'docs'
+      - 'perf'
+  default: patch
+
+template: |
+  ## What's Changed
+
+  $CHANGES

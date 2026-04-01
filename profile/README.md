@@ -1,34 +1,19 @@
 # atnplex
 
-Practical infrastructure, automation, self-hosted tooling, and platform engineering.
+Infrastructure automation, self-hosted services, and DevOps tooling.
 
-## Focus
+## Shared CI/CD Workflows
 
-We build and maintain projects around:
+The [`atnplex/.github`](https://github.com/atnplex/.github) repository provides
+reusable GitHub Actions workflows for all `atnplex` repositories:
 
-- Infrastructure and DevOps automation
-- Self-hosted services and operational tooling
-- GitHub Actions and CI/CD workflows
-- Containerized applications and deployment patterns
-- Internal utilities, migration work, and experiments
+| Workflow | Purpose |
+|---|---|
+| [`_autofix`](.github/workflows/_autofix.yml) | Auto-format and commit code fixes |
+| [`_dependency-review`](.github/workflows/_dependency-review.yml) | Review dependency changes in PRs |
+| [`_labeler`](.github/workflows/_labeler.yml) | Auto-label PRs by changed files |
+| [`_pr-title-check`](.github/workflows/_pr-title-check.yml) | Enforce Conventional Commits titles |
+| [`_release-drafter`](.github/workflows/_release-drafter.yml) | Maintain automated draft releases |
+| [`_stale`](.github/workflows/_stale.yml) | Close stale issues and PRs |
 
-## Working style
-
-We prefer systems that are:
-
-- reusable
-- observable
-- boring in production
-- easy to maintain
-- documented well enough to survive later
-
-## Contributing
-
-If you open an issue or pull request:
-
-- keep it specific and actionable  
-- include repro steps where possible  
-- share logs, config snippets, and screenshots when they help  
-- document any operational impact (deployment, config, secrets, downtime)
-
-Thanks for helping us keep things reliable and maintainable.
+See [`docs/workflows.md`](docs/workflows.md) for full documentation.
