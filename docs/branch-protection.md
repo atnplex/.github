@@ -3,8 +3,8 @@
 ## Purpose
 
 Documents the recommended branch protection rules for the `main` branch of every
-repository in the `atnplex` organization, including `atnplex/.github`
-itself. These rules enforce code review, CI gating, and commit hygiene.
+repository in the `atnplex` organization, including `atnplex/.github` itself.
+These rules enforce code review, CI gating, and commit hygiene.
 
 ## Recommended Rules for `main`
 
@@ -48,6 +48,14 @@ for the `main` branch.
 - **Require linear history**: ✅ recommended
 - **Allow force pushes**: ❌ disabled for `main`
 - **Allow deletions**: ❌ disabled for `main`
+
+## Notes
+
+- These rules must be configured manually via the GitHub UI or the GitHub API /
+  Terraform. They cannot be enforced from this repository's files alone.
+- The `CODEOWNERS` file (`.github/CODEOWNERS`) works in conjunction with branch
+  protection rule #1 to ensure that any change to a critical path requires an
+  explicit owner review.
 
 ## Usage
 

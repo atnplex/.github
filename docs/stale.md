@@ -1,6 +1,6 @@
 # Stale
 
-Workflow file: [`.github/workflows/_stale.yml`](../.github/workflows/_stale.yml)
+Workflow file: [`../.github/workflows/_stale.yml`](../.github/workflows/_stale.yml)
 
 ## Purpose
 
@@ -14,12 +14,12 @@ jobs:
     if: github.event_name == 'schedule'
     uses: atnplex/.github/.github/workflows/_stale.yml@main
     secrets: inherit
-    # Optionally override the runner:
+    # Optional: override the runner
     # with:
-    #   runner: 'ubuntu-latest'
+    #   runner: ubuntu-latest
 ```
 
-The caller workflow should include a schedule trigger, e.g.:
+Typical trigger in the consumer caller workflow:
 
 ```yaml
 on:
@@ -29,17 +29,15 @@ on:
 
 ## Required Secrets / Permissions
 
-- `GITHUB_TOKEN` (built-in)
-
-## Why use it
-
-Keeps repositories tidy without manual triage.
+- `GITHUB_TOKEN` (built-in; no configuration needed)
 
 ## Notes
 
-Exempt labels should be used for items that should never go stale:
+Exempt labels — items that should never go stale:
 
 - `security`
 - `blocked`
 - `pinned`
 - `do-not-merge`
+
+Why use it: useful for keeping repositories tidy without manual triage.

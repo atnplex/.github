@@ -3,8 +3,8 @@
 ## Purpose
 
 Documents all secrets required by the shared reusable workflows in
-`atnplex/.github`, where they must be configured, their naming
-conventions, and what to do if a secret is accidentally committed.
+`atnplex/.github`, where they must be configured, their naming conventions,
+and what to do if a secret is accidentally committed.
 
 ## Required Secrets
 
@@ -99,4 +99,3 @@ an org **owner** role.
 - Always use `${{ secrets.NAME }}` references in workflow files.
 - The `.gitignore` in this repo explicitly ignores common secret file patterns
   (`.env`, `*.pem`, `*.key`, etc.).
-- GitHub Advanced Security secret scanning is enabled via `.github/secret_scanning.yml`.

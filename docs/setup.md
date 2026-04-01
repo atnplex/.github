@@ -2,17 +2,17 @@
 
 ## Purpose
 
-Explains how to configure `atnplex/.github` so that reusable workflows
-can be shared across the organization, and provides a step-by-step onboarding
+Explains how to configure `atnplex/.github` so that reusable workflows can be
+shared across the organization, and provides a step-by-step onboarding
 checklist for new org admins.
 
 ## Repository purpose
 
 This repository stores:
 
-- reusable GitHub Actions workflows (called by other `atnplex` repos)
-- shared templates for new and existing repositories
-- workflow documentation and conventions
+- Reusable GitHub Actions workflows (called by other `atnplex` repos)
+- Shared templates for new and existing repositories
+- Automation documentation and onboarding guides
 
 ## Required GitHub settings
 
@@ -24,10 +24,9 @@ Configure:
 
 1. **Allow GitHub Actions to run**
 2. **Allow actions and reusable workflows** according to organization policy
-3. **Access**: because this repo is **public**, any repository (inside or outside
-   the org) can call the reusable workflows. If you want to restrict callers to
-   `atnplex`-owned repos only, add `if: github.repository_owner == 'atnplex'`
-   conditions inside each workflow, or enforce this at the org Actions policy level.
+3. **Access**: because this is a public repo, any repository can call these
+   workflows. If you want to limit to `atnplex` org only, use an org-level
+   Actions policy to restrict which repos can use workflow files from this repo.
 
 ## Organization allow list
 
@@ -40,22 +39,19 @@ autofix-ci/*
 amannn/*
 release-drafter/*
 atnplex/*
-anguy079/*
-atngit2/*
-zhiq7/*
 ```
 
-Add more entries later if additional third-party actions are adopted.
+Add more entries as additional third-party actions are adopted.
 
 ## Calling reusable workflows
 
-Other repositories call these workflows with:
+Other repositories call these workflows with syntax like:
 
 ```yaml
 uses: atnplex/.github/.github/workflows/_autofix.yml@main
 ```
 
-Pin to a tag or commit SHA once the workflows stabilize for production use:
+Pin to a tag or commit SHA once the workflows stabilize for additional safety:
 
 ```yaml
 uses: atnplex/.github/.github/workflows/_autofix.yml@v1.0.0
@@ -83,7 +79,7 @@ Quick summary for new admins:
 - [ ] Confirm org Owner role at github.com/orgs/atnplex/people
 - [ ] Confirm org secrets are configured and accessible
 - [ ] Confirm self-hosted runners are visible and online
-- [ ] Confirm `.github` Actions settings are correctly configured
+- [ ] Confirm `.github` Actions access setting is correct
 - [ ] Successfully trigger a test workflow dispatch from a consumer repo
 - [ ] Confirm branch protection and CODEOWNERS are active on `main`
 - [ ] Verify no secrets are present in any committed file

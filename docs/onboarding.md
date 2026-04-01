@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Checklist for `atnplex` org admin users to verify that their access is
-correctly configured and that all shared workflows and resources are usable
-from any `atnplex` repository.
+Checklist for `atnplex` org admin users to verify that their access is correctly
+configured and that all shared workflows and resources are usable from any
+`atnplex` repository.
 
 ## Usage
 
@@ -32,14 +32,14 @@ independently to confirm end-to-end access.
 
 - [ ] Navigate to **github.com/organizations/atnplex/settings/actions/runners**
 - [ ] Confirm at least one `self-hosted`, `linux` runner is listed and online.
-- [ ] If no runner is online, pass `runner: 'ubuntu-latest'` in caller workflows
-      to temporarily bypass self-hosted runners (see `docs/runners.md`).
+- [ ] If no runner is online, pass `runner: ubuntu-latest` as a workflow input
+      to temporarily fall back to GitHub-hosted runners (see `docs/runners.md`).
 
-### Step 4 — Confirm `atnplex/.github` Actions settings
+### Step 4 — Confirm `atnplex/.github` Actions access setting
 
 - [ ] Navigate to **github.com/atnplex/.github/settings/actions**
-- [ ] Confirm that Actions are enabled and that the allow list includes all
-      required third-party actions (see `docs/setup.md`).
+- [ ] Under **Access**, confirm the setting is configured per org policy.
+- [ ] Confirm consumer repos can call these reusable workflows.
 
 ### Step 5 — Confirm you can trigger workflow dispatches
 
@@ -57,8 +57,8 @@ independently to confirm end-to-end access.
 
 - [ ] Verify that `atnplex/.github` has branch protection enabled on
       `main` (see `docs/branch-protection.md` for recommended settings).
-- [ ] Open a test PR and confirm that a CODEOWNERS review is requested
-      from `@atnplex/owners`.
+- [ ] Open a test PR to `.github` and confirm that a CODEOWNERS review
+      is requested from `@atnplex/owners`.
 - [ ] Confirm that the PR cannot be merged without at least 1 owner approval.
 
 ### Step 7 — Verify no secrets in the repo
@@ -78,5 +78,5 @@ This checklist requires **org owner** access in GitHub.
   significant change to workflows, secrets, or runner configuration.
 - If any step fails, consult `docs/security.md` and `docs/setup.md` for
   remediation steps.
-- All org admins should be able to complete every step independently.
-  If one admin cannot, investigate and resolve the access gap.
+- All admins should be able to complete every step independently. If one admin
+  cannot, investigate and resolve the access gap.
